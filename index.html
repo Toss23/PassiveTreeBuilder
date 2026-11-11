@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <title>Project Tree</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/styles.css"
+          onerror="if(!this.dataset.fb){this.dataset.fb='1';this.href='styles.css';}" />
+</head>
+<body>
+    <div id="app">
+        <div id="canvasWrap">
+            <div class="toolbar">
+                <button id="btnUndo" title="Отменить (Ctrl+Z)">↶</button>
+                <button id="btnRedo" title="Повторить (Ctrl+Y)">↷</button>
+                <button id="btnSave">💾 Сохранить JSON</button>
+                <button id="btnLoad">📂 Загрузить</button>
+                <button id="btnNew">✕ Новое дерево</button>
+                <button id="btnFit">⤢ Центр</button>
+            </div>
+            <svg id="svg">
+                <g id="viewport">
+                    <g id="edges"></g>
+                    <g id="nodes"></g>
+                </g>
+                <rect id="selectionRect" style="display:none"></rect>
+            </svg>
+            <div id="noteLayer"></div>
+            <div id="tooltipLayer"></div>
+            <input type="file" id="fileInput" accept=".json,application/json" style="display:none" />
+        </div>
+
+        <div id="panelResizer" title="Потяни, чтобы изменить ширину"></div>
+
+        <aside id="panel">
+            <h1>Project Tree</h1>
+
+            <div class="mode-tabs">
+                <button data-mode="edit" class="active">✎ Редактор</button>
+                <button data-mode="test">▶ Тест</button>
+                <button data-mode="settings">⚙ Настройки</button>
+            </div>
+
+            <div id="panelEdit">
+                <button id="btnAddNote" class="primary" style="width:100%; margin-bottom:10px;">+ Добавить карточку</button>
+
+                <div id="searchSection"></div>
+                <ul class="hotkeys">
+                    <li><b>Shift+ЛКМ</b> — добавить к выделению</li>
+                    <li><b>Shift+drag</b> — рамка выделения нод</li>
+                    <li><b>ПКМ по ноде</b> — дочерняя нода</li>
+                    <li><b>ПКМ по связи</b> — удалить связь</li>
+                    <li><b>Ctrl+Z / Ctrl+Y</b> — отмена/повтор действия</li>
+                    <li><b>Ctrl+C / Ctrl+V</b> — копирование параметров нодов</li>
+                    <li><b>Delete</b> — удалить выделенное</li>
+                </ul>
+                <div id="nodeSection"></div>
+            </div>
+
+            <div id="panelTest" style="display:none"></div>
+
+            <div id="panelConfig" style="display:none">
+                <div id="configSection"></div>
+
+                <div class="divider"></div>
+                <h2>Список статов (глобальный)</h2>
+                <div id="statsSection"></div>
+
+                <div class="divider"></div>
+                <h2>Теги</h2>
+                <div id="tagsSection"></div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+      (function () {
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'js/main.js';
+        s.onerror = function () {
+          if (s.dataset.fb) return;
+          s.dataset.fb = '1';
+          var f = document.createElement('script');
+          f.type = 'module';
+          f.src = 'main.js';
+          document.body.appendChild(f);
+        };
+        document.body.appendChild(s);
+      })();
+    </script>
+</body>
+</html>
